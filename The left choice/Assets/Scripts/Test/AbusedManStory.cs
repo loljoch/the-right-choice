@@ -117,7 +117,7 @@ public class AbusedManStory : MonoBehaviour
             storyBox.text += c;
             yield return waitTime;
         }
-
+        Debug.Log("YAYEET");
         //Automates the text
         //yield return new WaitForSeconds(2f);
         //WriteMessage();
