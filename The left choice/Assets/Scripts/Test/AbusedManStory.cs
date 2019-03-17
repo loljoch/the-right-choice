@@ -22,7 +22,9 @@ public class AbusedManStory : MonoBehaviour
     [SerializeField] private bool isWriting = false;
     [SerializeField] private bool isInChoice = false;
     [SerializeField] private bool isInFirstPick = true;
+
     private int chatBranch = 0;
+    private int pressedButton = 0;
 
 
     private void Start()
@@ -187,27 +189,39 @@ public class AbusedManStory : MonoBehaviour
     public void NextPartOfStory(int buttonPressed)
     {
         if (isInFirstPick)
-        {
-            int tempButtonPress = buttonPressed;
+        { 
+            isInFirstPick = false;
+            pressedButton = buttonPressed;
         } else
         {
-            messageList.Clear();
-            buttonTextList.Clear();
-            messageNumber = -1;
-            isInChoice = false;
-
-            //Deactivates buttons after press
+            //Deactivates all the buttons
             for (int i = 0; i < buttonList.Count; i++)
             {
                 buttonList[i].gameObject.SetActive(false);
             }
+
+            //Checks if second team got the choice right
+            if(buttonPressed == pressedButton)
+            {
+                Debug.Log("goed geraden");
+            } else
+            {
+                Debug.Log("OOF fout antwoord");
+            }
+
+            //Sets everything up to continue the story
+            messageList.Clear();
+            buttonTextList.Clear();
+            messageNumber = -1;
+            isInChoice = false;
+            isInFirstPick = true;
 
             //Decides in which chatbranch you are (which story you're following)
             switch (chatBranch)
             {
                 case 0:
                     //Decides which button is pressed to get the next story
-                    switch (buttonPressed)
+                    switch (pressedButton)
                     {
                         case 0:
                             chatBranch = 1;
@@ -221,22 +235,56 @@ public class AbusedManStory : MonoBehaviour
                             buttonTextList.Add("Alleen als jij mij daarna ook helpt");
                             break;
 
-                            //case 1:
-                            //    messageList.Add(new AdvancedMessage("Ashley", "YEET", leftColor, ashley));
-                            //    messageList.Add(new AdvancedMessage("Rick", "YEET", rightColor, rick));
-                            //    messageList.Add(new AdvancedMessage("Tijd", "YEET", timeColor, rick));
-                            //    messageList.Add(new AdvancedMessage("Rick", "???", rightColor, rick));
+                        case 1:
+                            chatBranch = 2;
+                            messageList.Add(new Message("Ashley", "Ja sgoed", 1));
+                            messageList.Add(new Message("Rick", "Top, dankjewel", 1));
+                            messageList.Add(new Message("Tijd", "Paar dagen later", 2));
+                            messageList.Add(new Message("Rick", "Hey, ik weet dat je het druk hebt, maar zou je me weer kunnen helpen met mijn huiswerk?", 4));
 
-                            //    buttonTextList.Add("YEET");
-                            //    buttonTextList.Add("YEET");
-                            //    buttonTextList.Add("YEET");
-                            //    StartTextChat();
-                            //    break;
+                            buttonTextList.Add("Nee, dat gaat echt niet nu");
+                            buttonTextList.Add("Sorry, ik heb het nu echt heel druk");
+                            buttonTextList.Add("Alleen als jij mij daarna ook helpt");
+                            break;
 
                             //default:
                             //    break;
                     }
                     break;
+
+                case 1:
+                    switch (pressedButton)
+                    {
+                        case 0:
+                            chatBranch = 1;
+                            messageList.Add(new Message("Ashley", "Ja sgoed", 1));
+                            messageList.Add(new Message("Rick", "Top, dankjewel", 1));
+                            messageList.Add(new Message("Tijd", "Paar dagen later", 2));
+                            messageList.Add(new Message("Rick", "Hey, ik weet dat je het druk hebt, maar zou je me weer kunnen helpen met mijn huiswerk?", 4));
+
+                            buttonTextList.Add("Nee, dat gaat echt niet nu");
+                            buttonTextList.Add("Sorry, ik heb het nu echt heel druk");
+                            buttonTextList.Add("Alleen als jij mij daarna ook helpt");
+                            break;
+
+                        case 1:
+                            chatBranch = 2;
+                            messageList.Add(new Message("Ashley", "Ja sgoed", 1));
+                            messageList.Add(new Message("Rick", "Top, dankjewel", 1));
+                            messageList.Add(new Message("Tijd", "Paar dagen later", 2));
+                            messageList.Add(new Message("Rick", "Hey, ik weet dat je het druk hebt, maar zou je me weer kunnen helpen met mijn huiswerk?", 4));
+
+                            buttonTextList.Add("Nee, dat gaat echt niet nu");
+                            buttonTextList.Add("Sorry, ik heb het nu echt heel druk");
+                            buttonTextList.Add("Alleen als jij mij daarna ook helpt");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
+
 
                 default:
                     break;
