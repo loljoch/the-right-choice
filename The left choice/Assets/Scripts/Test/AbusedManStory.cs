@@ -19,7 +19,9 @@ public class AbusedManStory : MonoBehaviour
 
     [SerializeField] private float timeBetweenMessages, standardTimeBetweenMessages;
     private WaitForSeconds waitTime;
-    private bool isWriting = false;
+    [SerializeField] private bool isWriting = false;
+    [SerializeField] private bool isInChoice = false;
+    [SerializeField] private bool isInFirstPick = true;
     private int chatBranch = 0;
 
 
@@ -118,18 +120,17 @@ public class AbusedManStory : MonoBehaviour
 
             }
         }
+
         //Starts the typewriter effect
         StartCoroutine(PlayMessage());
 
-        
+
     }
 
 
     //Sets the message into the box
     IEnumerator PlayMessage()
     {
-        isWriting = true;
-
         storyBox.text = "";
         foreach (char c in messageList[messageNumber].textMessage)
         {
@@ -141,14 +142,14 @@ public class AbusedManStory : MonoBehaviour
         isWriting = false;
         timeBetweenMessages = standardTimeBetweenMessages;
 
-        Debug.Log("list "+ (messageList.Count-1));
-
-        Debug.Log("number "+ (messageNumber));
         //Spawn buttons
         if (messageNumber == messageList.Count-1)
         {
-            Debug.Log("YAYEET");
             SpawnButtons();
+            isInChoice = true;
+        } else
+        {
+            isInChoice = false;
         }
     }
 
@@ -157,11 +158,12 @@ public class AbusedManStory : MonoBehaviour
     //Goes to previous message
     public void PreviousMessage()
     {
-        if (!isWriting)
+        if (!isWriting && (messageNumber-1 >= 0))
         {
+            isWriting = true;
             messageNumber--;
             WriteMessage();
-        } else
+        } else if (!isInChoice)
         {
             timeBetweenMessages = 0;
         }
@@ -170,14 +172,78 @@ public class AbusedManStory : MonoBehaviour
 
     public void NextMessage()
     {
-        if (!isWriting)
+        if (!isWriting && !isInChoice)
         {
+            isWriting = true;
             messageNumber++;
             WriteMessage();
-        } else
-        {
+        }else if (!isInChoice)
+            {
             timeBetweenMessages = 0;
         }
     }
 
+
+    public void NextPartOfStory(int buttonPressed)
+    {
+        if (isInFirstPick)
+        {
+            int tempButtonPress = buttonPressed;
+        } else
+        {
+            messageList.Clear();
+            buttonTextList.Clear();
+            messageNumber = -1;
+            isInChoice = false;
+
+            //Deactivates buttons after press
+            for (int i = 0; i < buttonList.Count; i++)
+            {
+                buttonList[i].gameObject.SetActive(false);
+            }
+
+            //Decides in which chatbranch you are (which story you're following)
+            switch (chatBranch)
+            {
+                case 0:
+                    //Decides which button is pressed to get the next story
+                    switch (buttonPressed)
+                    {
+                        case 0:
+                            chatBranch = 1;
+                            messageList.Add(new Message("Ashley", "Ja sgoed", 1));
+                            messageList.Add(new Message("Rick", "Top, dankjewel", 1));
+                            messageList.Add(new Message("Tijd", "Paar dagen later", 2));
+                            messageList.Add(new Message("Rick", "Hey, ik weet dat je het druk hebt, maar zou je me weer kunnen helpen met mijn huiswerk?", 4));
+
+                            buttonTextList.Add("Nee, dat gaat echt niet nu");
+                            buttonTextList.Add("Sorry, ik heb het nu echt heel druk");
+                            buttonTextList.Add("Alleen als jij mij daarna ook helpt");
+                            break;
+
+                            //case 1:
+                            //    messageList.Add(new AdvancedMessage("Ashley", "YEET", leftColor, ashley));
+                            //    messageList.Add(new AdvancedMessage("Rick", "YEET", rightColor, rick));
+                            //    messageList.Add(new AdvancedMessage("Tijd", "YEET", timeColor, rick));
+                            //    messageList.Add(new AdvancedMessage("Rick", "???", rightColor, rick));
+
+                            //    buttonTextList.Add("YEET");
+                            //    buttonTextList.Add("YEET");
+                            //    buttonTextList.Add("YEET");
+                            //    StartTextChat();
+                            //    break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
+        }
+    }
 }
