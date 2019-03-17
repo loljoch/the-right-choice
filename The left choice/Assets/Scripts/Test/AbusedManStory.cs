@@ -10,9 +10,12 @@ public class AbusedManStory : MonoBehaviour
     [SerializeField] private Text leftName, rightName;
     private List<PersonScript> personScriptList;
 
-
+    //Choice button menu
+    [SerializeField] private Animator choiceMenuAnimation;
     [SerializeField] private List<Button> buttonList;
     [SerializeField] private List<string> buttonTextList;
+
+
     private List<Message> messageList;
     private int messageNumber = -1;
 
@@ -52,14 +55,30 @@ public class AbusedManStory : MonoBehaviour
     }
 
     //Spawns the choice buttons
-    private void SpawnButtons()
+    public void SpawnButtons(bool spawnButtons)
     {
-        for (int i = 0; i < buttonTextList.Count; i++)
+        if (!spawnButtons)
         {
-            buttonList[i].GetComponentInChildren<Text>().text = buttonTextList[i];
-            buttonList[i].gameObject.SetActive(true);
+            choiceMenuAnimation.SetBool("Open", true);
+        } else {
+            for (int i = 0; i < buttonTextList.Count; i++)
+            {
+                buttonList[i].GetComponentInChildren<Text>().text = buttonTextList[i];
+                buttonList[i].gameObject.SetActive(true);
+            }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
     //Assigns the button list
     private void AssignButtons()
@@ -147,7 +166,7 @@ public class AbusedManStory : MonoBehaviour
         //Spawn buttons
         if (messageNumber == messageList.Count-1)
         {
-            SpawnButtons();
+            SpawnButtons(false);
             isInChoice = true;
         } else
         {
@@ -172,6 +191,7 @@ public class AbusedManStory : MonoBehaviour
         
     }
 
+    //Goes to next message
     public void NextMessage()
     {
         if (!isWriting && !isInChoice)
@@ -195,6 +215,7 @@ public class AbusedManStory : MonoBehaviour
         } else
         {
             //Deactivates all the buttons
+            choiceMenuAnimation.SetBool("Open", false);
             for (int i = 0; i < buttonList.Count; i++)
             {
                 buttonList[i].gameObject.SetActive(false);
