@@ -11,17 +11,21 @@ public class AbusedManStory : MonoBehaviour
     private List<PersonScript> personScriptList;
 
 
+    [SerializeField] private List<Button> buttonList;
     [SerializeField] private List<string> buttonTextList;
     private List<Message> messageList;
-    private int messageNumber = 0;
+    private int messageNumber = -1;
 
-    [SerializeField] private float timeBetweenMessages;
+
+    [SerializeField] private float timeBetweenMessages, standardTimeBetweenMessages;
     private WaitForSeconds waitTime;
+    private bool isWriting = false;
     private int chatBranch = 0;
 
 
     private void Start()
     {
+        AssignButtons();
         AssignPersons();
 
         waitTime = new WaitForSeconds(timeBetweenMessages);
@@ -40,6 +44,29 @@ public class AbusedManStory : MonoBehaviour
         buttonTextList.Add("Nee liever niet ik heb betere dingen te doen");
         buttonTextList.Add("Alleen als jij mij daarna ook helpt");
         buttonTextList.Add("ok");
+
+    }
+
+    //Spawns the choice buttons
+    private void SpawnButtons()
+    {
+        for (int i = 0; i < buttonTextList.Count; i++)
+        {
+            buttonList[i].GetComponentInChildren<Text>().text = buttonTextList[i];
+            buttonList[i].gameObject.SetActive(true);
+        }
+    }
+
+    //Assigns the button list
+    private void AssignButtons()
+    {
+        GameObject[] tempButtonList = GameObject.FindGameObjectsWithTag("Button");
+        buttonList = new List<Button>();
+        for (int i = 0; i < tempButtonList.Length; i++)
+        {
+            buttonList.Add(tempButtonList[i].GetComponent<Button>());
+            tempButtonList[i].SetActive(false);
+        }
 
     }
 
@@ -94,15 +121,6 @@ public class AbusedManStory : MonoBehaviour
         //Starts the typewriter effect
         StartCoroutine(PlayMessage());
 
-
-        //Makes sure the next message is the next message
-        if (messageNumber != personScriptList.Count)
-        {
-            messageNumber++;
-        } else
-        {
-            //spawn buttons
-        }
         
     }
 
@@ -110,17 +128,28 @@ public class AbusedManStory : MonoBehaviour
     //Sets the message into the box
     IEnumerator PlayMessage()
     {
-        waitTime = new WaitForSeconds(timeBetweenMessages);
+        isWriting = true;
+
         storyBox.text = "";
         foreach (char c in messageList[messageNumber].textMessage)
         {
             storyBox.text += c;
             yield return waitTime;
+            waitTime = new WaitForSeconds(timeBetweenMessages);
         }
-        Debug.Log("YAYEET");
-        //Automates the text
-        //yield return new WaitForSeconds(2f);
-        //WriteMessage();
+
+        isWriting = false;
+        timeBetweenMessages = standardTimeBetweenMessages;
+
+        Debug.Log("list "+ (messageList.Count-1));
+
+        Debug.Log("number "+ (messageNumber));
+        //Spawn buttons
+        if (messageNumber == messageList.Count-1)
+        {
+            Debug.Log("YAYEET");
+            SpawnButtons();
+        }
     }
 
 
@@ -128,8 +157,27 @@ public class AbusedManStory : MonoBehaviour
     //Goes to previous message
     public void PreviousMessage()
     {
-        messageNumber = messageNumber - 2;
-        WriteMessage();
+        if (!isWriting)
+        {
+            messageNumber--;
+            WriteMessage();
+        } else
+        {
+            timeBetweenMessages = 0;
+        }
+        
+    }
+
+    public void NextMessage()
+    {
+        if (!isWriting)
+        {
+            messageNumber++;
+            WriteMessage();
+        } else
+        {
+            timeBetweenMessages = 0;
+        }
     }
 
 }
