@@ -53,7 +53,7 @@ public class AbusedManStory : MonoBehaviour
 
         messageList.Add(new Message("Persoon 2", "Hallo, ik ben persoon 2", 1));
         messageList.Add(new Message("Persoon 3", "Hallo, ik ben persoon 3", 2));
-        messageList.Add(new Message("Persoon 1", "~", 1));
+        messageList.Add(new Message("Persoon 4", "~", 3));
         nextSceneSetup = new SceneSetup(false, null, availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
         messageList.Add(new Message("Persoon 4", "Hallo, ik ben persoon 4", 3));
         messageList.Add(new Message("Persoon 5", "Hallo, ik ben persoon 5", 4));
@@ -350,6 +350,7 @@ public class AbusedManStory : MonoBehaviour
     {
         Debug.Log("I made a new scene");
         AssignPersons();
+        
 
         //Assigns the sprites
         for (int i = 0; i < nextSetup.sceneSprites.Count; i++)
