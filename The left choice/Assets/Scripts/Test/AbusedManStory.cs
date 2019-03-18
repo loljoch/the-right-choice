@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class AbusedManStory : MonoBehaviour
 {
+    [SerializeField] private Sprite[] availableSprites;
+
+
     //All items to do with projecting the message
     [SerializeField] private Text storyBox;
     [SerializeField] private Text leftName, rightName;
-    private List<PersonScript> personScriptList;
+    [SerializeField]private List<PersonScript> personScriptList;
 
     //Choice button menu
     [SerializeField] private Animator choiceMenuAnimation;
@@ -27,24 +30,33 @@ public class AbusedManStory : MonoBehaviour
     [SerializeField] private bool isInFirstPick = true;
 
     private int chatBranch = 0;
+    private SceneSetup nextSceneSetup;
     private int pressedButton = 0;
 
 
     private void Start()
     {
         AssignButtons();
-        AssignPersons();
+        nextSceneSetup = new SceneSetup(false, availableSprites[0], availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
+        NextScene(nextSceneSetup);
 
         waitTime = new WaitForSeconds(timeBetweenMessages);
         buttonTextList = new List<string>();
         messageList = new List<Message>();
 
         //Sets the starting messages
-        messageList.Add(new Message("Persoon 1", "Hallo, ik ben persoon 1", 1));
-        messageList.Add(new Message("Persoon 2", "Hallo, ik ben persoon 2", 2));
-        messageList.Add(new Message("Persoon 3", "Hallo, ik ben persoon 3", 3));
-        messageList.Add(new Message("Persoon 4", "Hallo, ik ben persoon 4", 4));
-        messageList.Add(new Message("Persoon 5", "Hallo, ik ben persoon 5", 5));
+        messageList.Add(new Message("Persoon 1", "Hallo, ik ben persoon 1", 0));
+
+        //This is how to skip after a message
+        //messageList.Add(new Message("Persoon 1", "~", 1));
+        //nextSceneSetup = new SceneSetup(false, null, availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
+
+        messageList.Add(new Message("Persoon 2", "Hallo, ik ben persoon 2", 1));
+        messageList.Add(new Message("Persoon 3", "Hallo, ik ben persoon 3", 2));
+        messageList.Add(new Message("Persoon 1", "~", 1));
+        nextSceneSetup = new SceneSetup(false, null, availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
+        messageList.Add(new Message("Persoon 4", "Hallo, ik ben persoon 4", 3));
+        messageList.Add(new Message("Persoon 5", "Hallo, ik ben persoon 5", 4));
 
         //Sets the starting buttons
         buttonTextList.Add("Ja sgoed");
@@ -70,16 +82,6 @@ public class AbusedManStory : MonoBehaviour
     }
 
 
-
-
-
-
-
-
-
-
-
-
     //Assigns the button list
     private void AssignButtons()
     {
@@ -102,6 +104,7 @@ public class AbusedManStory : MonoBehaviour
         for (int i = 0; i < tempPersonList.Length; i++)
         {
             personScriptList.Add(tempPersonList[i].GetComponent<PersonScript>());
+            tempPersonList[i].SetActive(true);
         }
 
     }
@@ -152,6 +155,25 @@ public class AbusedManStory : MonoBehaviour
     //Sets the message into the box
     IEnumerator PlayMessage()
     {
+        //Checks if it's a next scene message
+        bool skipRoutine = false;
+        foreach (char c in messageList[messageNumber].textMessage)
+        {
+            string tempString = c+"";
+            Debug.Log(tempString);
+            if(tempString != "~")
+            {
+                break;
+            } else
+            {
+                NextScene(nextSceneSetup);
+                skipRoutine = true;
+
+                break;
+            }
+        }
+
+        //Typewriter effect
         storyBox.text = "";
         foreach (char c in messageList[messageNumber].textMessage)
         {
@@ -161,7 +183,13 @@ public class AbusedManStory : MonoBehaviour
         }
 
         isWriting = false;
+        if (skipRoutine == true)
+        {
+            NextMessage();
+        }
+
         timeBetweenMessages = standardTimeBetweenMessages;
+            
 
         //Spawn buttons
         if (messageNumber == messageList.Count-1)
@@ -236,6 +264,7 @@ public class AbusedManStory : MonoBehaviour
             messageNumber = -1;
             isInChoice = false;
             isInFirstPick = true;
+
 
             //Decides in which chatbranch you are (which story you're following)
             switch (chatBranch)
@@ -313,6 +342,35 @@ public class AbusedManStory : MonoBehaviour
 
 
 
+        }
+    }
+
+    //Changes the sprites of the character
+    private void NextScene(SceneSetup nextSetup)
+    {
+        Debug.Log("I made a new scene");
+        AssignPersons();
+
+        //Assigns the sprites
+        for (int i = 0; i < nextSetup.sceneSprites.Count; i++)
+        {
+            for (int w = 0; w < personScriptList.Count; w++)
+            {
+                if (personScriptList[w].personNumber == i)
+                {
+                    personScriptList[w].GetComponent<Image>().sprite = nextSetup.sceneSprites[i];
+                    break;
+                }
+            }
+        }
+
+        //Sets the persons without sprites on false
+        for (int i = 0; i < personScriptList.Count; i++)
+        {
+            if (personScriptList[i].GetComponent<Image>().sprite == null)
+            {
+                personScriptList[i].gameObject.SetActive(false);
+            }
         }
     }
 }

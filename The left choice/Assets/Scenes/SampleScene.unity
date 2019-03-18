@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba023d7a63ff14387cb0c3dff03ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personNumber: 4
+  personNumber: 3
   isPersonRight: 0
   textColor: {r: 0.93333334, g: 0.42745098, b: 0.44313726, a: 1}
   speechBubble: {fileID: 615131192}
@@ -1425,7 +1425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba023d7a63ff14387cb0c3dff03ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personNumber: 1
+  personNumber: 0
   isPersonRight: 0
   textColor: {r: 0.11764706, g: 0.9411765, b: 1, a: 1}
   speechBubble: {fileID: 1753975168}
@@ -1611,9 +1611,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6d48a249f0ab64182096d53e474f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  availableSprites:
+  - {fileID: 21300000, guid: c37e8b0c5d6a3cd4d89b8af28699a305, type: 3}
+  - {fileID: 21300000, guid: 84e91b6aa6fd3d94b94773ddafecbb7c, type: 3}
+  - {fileID: 21300000, guid: c37e8b0c5d6a3cd4d89b8af28699a305, type: 3}
+  - {fileID: 21300000, guid: 84e91b6aa6fd3d94b94773ddafecbb7c, type: 3}
+  - {fileID: 21300000, guid: c37e8b0c5d6a3cd4d89b8af28699a305, type: 3}
   storyBox: {fileID: 297061179}
   leftName: {fileID: 1279692153}
   rightName: {fileID: 1072072924}
+  personScriptList: []
   choiceMenuAnimation: {fileID: 36040032}
   buttonList:
   - {fileID: 1441060360}
@@ -1731,7 +1738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba023d7a63ff14387cb0c3dff03ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personNumber: 5
+  personNumber: 4
   isPersonRight: 0
   textColor: {r: 0.93333334, g: 0.827451, b: 0.42745098, a: 1}
   speechBubble: {fileID: 666732623}
@@ -2317,7 +2324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba023d7a63ff14387cb0c3dff03ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personNumber: 3
+  personNumber: 2
   isPersonRight: 0
   textColor: {r: 0.4117647, g: 0.77254903, b: 0.44705883, a: 1}
   speechBubble: {fileID: 890174905}
@@ -2806,7 +2813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba023d7a63ff14387cb0c3dff03ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personNumber: 2
+  personNumber: 1
   isPersonRight: 0
   textColor: {r: 0.77254903, g: 0.4117647, b: 0.67058825, a: 1}
   speechBubble: {fileID: 64449303}
