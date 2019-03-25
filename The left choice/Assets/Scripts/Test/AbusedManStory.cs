@@ -33,9 +33,15 @@ public class AbusedManStory : MonoBehaviour
     private SceneSetup nextSceneSetup;
     private int pressedButton = 0;
 
+    private PlayerManagerScript playerManager;
+    [SerializeField] private GameObject playerAnswerFeedback;
+    [SerializeField] Color colorWrong, colorRight;
+
 
     private void Start()
     {
+        playerManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PlayerManagerScript>();
+
         AssignButtons();
         nextSceneSetup = new SceneSetup(false, availableSprites[0], availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
         NextScene(nextSceneSetup);
@@ -45,24 +51,23 @@ public class AbusedManStory : MonoBehaviour
         messageList = new List<Message>();
 
         //Sets the starting messages
-        messageList.Add(new Message("Persoon 1", "Hallo, ik ben persoon 1", 0));
+        messageList.Add(new Message("Felix", "Hey, daar zijn ze eindelijk hoor.", 4));
 
         //This is how to skip after a message
         //messageList.Add(new Message("Persoon 1", "~", 1));
         //nextSceneSetup = new SceneSetup(false, null, availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
-
-        messageList.Add(new Message("Persoon 2", "Hallo, ik ben persoon 2", 1));
-        messageList.Add(new Message("Persoon 3", "Hallo, ik ben persoon 3", 2));
-        messageList.Add(new Message("Persoon 4", "~", 3));
+        messageList.Add(new Message("Mikey", "~", 1));
         nextSceneSetup = new SceneSetup(false, null, availableSprites[1], availableSprites[2], availableSprites[3], availableSprites[4]);
-        messageList.Add(new Message("Persoon 4", "Hallo, ik ben persoon 4", 3));
-        messageList.Add(new Message("Persoon 5", "Hallo, ik ben persoon 5", 4));
+        messageList.Add(new Message("Mikey", "Ey, iedereen lang niet gezien, hoe gaat het met jullie?", 1));
+        messageList.Add(new Message("Felix", "Ahh, met mij loopt het altijd wel op rolletjes, dat weet je toch.", 4));
+        
+        messageList.Add(new Message("Samantha", "Ik heb wat struggles op school, maar verder gaat het wel goed. Met jullie?", 3));
+        messageList.Add(new Message("Mikey", "Nou, Laura en ik ga-", 1));
+        messageList.Add(new Message("Laura", "Gaat super, we hebben zelfs een nieuwtje om met jullie te delen.", 0));
 
         //Sets the starting buttons
-        buttonTextList.Add("Ja sgoed");
-        buttonTextList.Add("Nee liever niet ik heb betere dingen te doen");
-        buttonTextList.Add("Alleen als jij mij daarna ook helpt");
-        buttonTextList.Add("ok");
+        buttonTextList.Add("Laura terug onderbreken");
+        buttonTextList.Add("Laura niet terug onderbreken");
 
     }
 
@@ -78,6 +83,8 @@ public class AbusedManStory : MonoBehaviour
                 buttonList[i].GetComponentInChildren<Text>().text = buttonTextList[i];
                 buttonList[i].gameObject.SetActive(true);
             }
+            choiceMenuAnimation.GetComponentInChildren<Text>().text = "Speler " + playerManager.CalculatePlayerTurn() + "\n" + "Wat zou jij doen in deze situatie?";
+            
         }
     }
 
@@ -240,6 +247,7 @@ public class AbusedManStory : MonoBehaviour
         { 
             isInFirstPick = false;
             pressedButton = buttonPressed;
+            choiceMenuAnimation.GetComponentInChildren<Text>().text = "Andere spelers" + "\n" + "Wat denken jullie dat " + "Speler " + playerManager.PreviousPlayerTurn() + " heeft gekozen?";
         } else
         {
             //Deactivates all the buttons
@@ -252,10 +260,16 @@ public class AbusedManStory : MonoBehaviour
             //Checks if second team got the choice right
             if(buttonPressed == pressedButton)
             {
-                Debug.Log("goed geraden");
+                playerAnswerFeedback.SetActive(true);
+                playerAnswerFeedback.GetComponent<Text>().text = "Goed" + "\n" + "geraden!";
+                playerAnswerFeedback.GetComponent<Text>().color = colorRight;
+                playerAnswerFeedback.GetComponent<Animator>().SetBool("PlayAnim", true);
             } else
             {
-                Debug.Log("OOF fout antwoord");
+                playerAnswerFeedback.SetActive(true);
+                playerAnswerFeedback.GetComponent<Text>().text = "Fout" + "\n" + "geraden";
+                playerAnswerFeedback.GetComponent<Text>().color = colorWrong;
+                playerAnswerFeedback.GetComponent<Animator>().SetBool("PlayAnim", true);
             }
 
             //Sets everything up to continue the story
@@ -303,6 +317,38 @@ public class AbusedManStory : MonoBehaviour
                     break;
 
                 case 1:
+                    switch (pressedButton)
+                    {
+                        case 0:
+                            chatBranch = 2;
+                            messageList.Add(new Message("Ashley", "Ja sgoed", 1));
+                            messageList.Add(new Message("Rick", "Top, dankjewel", 1));
+                            messageList.Add(new Message("Tijd", "Paar dagen later", 2));
+                            messageList.Add(new Message("Rick", "Hey, ik weet dat je het druk hebt, maar zou je me weer kunnen helpen met mijn huiswerk?", 4));
+
+                            buttonTextList.Add("Nee, dat gaat echt niet nu");
+                            buttonTextList.Add("Sorry, ik heb het nu echt heel druk");
+                            buttonTextList.Add("Alleen als jij mij daarna ook helpt");
+                            break;
+
+                        case 1:
+                            chatBranch = 2;
+                            messageList.Add(new Message("Ashley", "Ja sgoed", 1));
+                            messageList.Add(new Message("Rick", "Top, dankjewel", 1));
+                            messageList.Add(new Message("Tijd", "Paar dagen later", 2));
+                            messageList.Add(new Message("Rick", "Hey, ik weet dat je het druk hebt, maar zou je me weer kunnen helpen met mijn huiswerk?", 4));
+
+                            buttonTextList.Add("Nee, dat gaat echt niet nu");
+                            buttonTextList.Add("Sorry, ik heb het nu echt heel druk");
+                            buttonTextList.Add("Alleen als jij mij daarna ook helpt");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
+                case 2:
                     switch (pressedButton)
                     {
                         case 0:
