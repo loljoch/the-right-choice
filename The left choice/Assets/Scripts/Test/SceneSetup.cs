@@ -7,6 +7,7 @@ public class SceneSetup
 {
     public bool withTransition;
     public List<Sprite> sceneSprites;
+    public Sprite background;
     //public Sprite person1;
     //public Sprite person2;
     //public Sprite person3;
@@ -14,7 +15,7 @@ public class SceneSetup
     //public Sprite person5;
 
 
-    public SceneSetup(bool newWithTransition, Sprite newPerson1, Sprite newPerson2, Sprite newPerson3, Sprite newPerson4, Sprite newPerson5)
+    public SceneSetup(bool newWithTransition, Sprite newPerson1, Sprite newPerson2, Sprite newPerson3, Sprite newPerson4, Sprite newPerson5, Sprite newBackground)
     {
         withTransition = newWithTransition;
         sceneSprites = new List<Sprite>
@@ -25,5 +26,6 @@ public class SceneSetup
             newPerson4,
             newPerson5
         };
+        background = newBackground;
     }
 }
