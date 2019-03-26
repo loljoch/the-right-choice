@@ -511,7 +511,7 @@ public class AbusedManStory : MonoBehaviour
                     {
                         //Verbaasd zijn over hoe ze dat kan zeggen
                         case 0:
-                            chatBranch = 4;
+                            chatBranch = 5;
                             messageList.Add(new Message("Mikey", "Hey Laura", 0));
                             messageList.Add(new Message("Laura", "Nou ik zie je wel naar haar kijken, houd je nog wel van me?", 5));
                             messageList.Add(new Message("Mikey", "Natuurlijk houd ik nog van je schat.", 0));
@@ -519,15 +519,18 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Mikey", "Is dat niet een beetje drastisch?", 0));
                             messageList.Add(new Message("Laura", "EEN BEETJE DRASTISCH?, ik mag hopen dat je dat niet meende, ohja en nog iets, ik wil dat je nu gelijk naar huis komt", 5));
                             messageList.Add(new Message("Mikey", "Ja is goed, ik kom naar je toe", 0));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, null, availableSprites[0], availableSprites[2], availableSprites[4], availableSprites[3]);
+                            messageList.Add(new Message("Rob", "Yo is alles oké?", 0));
 
-                            buttonTextList.Add("Verbaasd zijn over hoe ze dat kan zeggen");
-                            buttonTextList.Add("Sorry zeggen dat je daar niet over na had gedacht");
+                            buttonTextList.Add("Ja Laura vroeg zich gewoon af waar ik was(Hou het gesprek geheim)");
+                            buttonTextList.Add("Nee niet echt (vertel over het telefoongesprek)");
 
                             break;
 
                         //Sorry zeggen dat je daar niet over na had gedacht
                         case 1:
-                            chatBranch = 4;
+                            chatBranch = 5;
                             messageList.Add(new Message("Mikey", "Tuurlijk niet, ik heb jou toch", 0));
                             messageList.Add(new Message("Laura", "Heb je sowieso wel nagedacht over hoe ik me nu voel?", 5));
                             messageList.Add(new Message("Laura", "Ik hou zoveel van je en dan spreek je gewoon met haar af achter me rug om", 5));
@@ -535,16 +538,169 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Laura", "MAAKT ME NIET UIT, ik wil niet meer dat je nog met haar omgaat zonder dat ik erbij ben", 5));
                             messageList.Add(new Message("Laura", "Oh en ik mag hopen dat je al onderweg naar huis bent", 5));
                             messageList.Add(new Message("Mikey", "Uhh ja ik kom er nu gelijk aan, totzo", 0));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, null, availableSprites[0], availableSprites[2], availableSprites[4], availableSprites[3]);
+                            messageList.Add(new Message("Rob", "Yo is alles oké?", 0));
 
-
-                            buttonTextList.Add("Verbaasd zijn over hoe ze dat kan zeggen");
-                            buttonTextList.Add("Sorry zeggen dat je daar niet over na had gedacht");
+                            buttonTextList.Add("Ja Laura vroeg zich gewoon af waar ik was(Hou het gesprek geheim)");
+                            buttonTextList.Add("Nee niet echt (vertel over het telefoongesprek)");
                             break;
 
                             //default:
                             //    break;
                     }
                     break;
+
+                //branch 5
+                case 5:
+                    switch (pressedButton)
+                    {
+                        //Ja Laura vroeg zich gewoon af waar ik was(Hou het gesprek geheim)
+                        case 0:
+                            chatBranch = 6;
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[4]);
+                            messageList.Add(new Message("Rob", "Ey hoe gaat het nu eigenlijk tussen jullie twee?", 0));
+
+                            buttonTextList.Add("Gaat wel goed");
+                            buttonTextList.Add("Een paar hobbeltjes in de weg");
+
+                            break;
+
+                        //Nee niet echt (vertel over het telefoongesprek)
+                        case 1:
+                            chatBranch = 6;
+                            messageList.Add(new Message("Mikey", "Nee, niet echt, Laura wil eigenlijk niet meer dat ik met jullie afspreek zonder haar", 0));
+                            messageList.Add(new Message("Rob", "Dat klinkt nogal manipulatief Mikey, misschien moe..", 5));
+                            messageList.Add(new Message("Samantha", "Klinkt best logisch, ze is gewoon bang dat je haar verlaat", 5));
+                            messageList.Add(new Message("Mikey", "Ja klopt, zouden jullie het erg vinden als ik voortaan alleen kom wanneer Laura ook kan komen", 0));
+                            messageList.Add(new Message("Samantha", "Nee hoor, we snappen het helemaal", 0));
+                            messageList.Add(new Message("Mikey", "Oké top jongens, ik moet er nu ook vandoor dus ik zie jullie de volgende keer wel", 0));
+                            messageList.Add(new Message("Rob", "Oké, laters", 0));
+                            messageList.Add(new Message("Samantha", "Doei Mikey", 0));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[4]);
+                            messageList.Add(new Message("Rob", "Ey hoe gaat het nu eigenlijk tussen jullie twee?", 0));
+
+                            buttonTextList.Add("Gaat wel goed");
+                            buttonTextList.Add("Een paar hobbeltjes in de weg");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
+                //branch 6
+                case 6:
+                    switch (pressedButton)
+                    {
+                        //Gaat wel goed
+                        case 0:
+                            chatBranch = 7;
+                            messageList.Add(new Message("Mikey", "Het gaat wel goed", 0));
+                            messageList.Add(new Message("Rob", "Dat is goed om te horen, ik krijg soms wel is me twijfels over jullie samen", 0));
+                            messageList.Add(new Message("Mikey", "Ah dat ik niet nodig joh, het gaat prima met Laura en mij", 0));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[4]);
+                            messageList.Add(new Message("Mikey", "Hey schat, ik vind dat je de laatste tijd wel een beetje negatief doet tegen me", 0));
+                            messageList.Add(new Message("Laura", "Wanneer dan?", 5));
+                            messageList.Add(new Message("Mikey", "Nou het feit dat je niet wilt dat ik met me vrienden omga zonder jou, vind ik best wel negatief", 0));
+                            messageList.Add(new Message("Laura", "Ja, maar dat komt omdat jij niet denkt aan hoe ik me voel op dat soort momenten", 5));
+                            messageList.Add(new Message("Mikey", "Alsnog denk ik dat je je daar wat minder over moeten stressen", 0));
+                            messageList.Add(new Message("Laura", "Ik kan me niet zomaar minder stressen, wanneer jij met mijn beste vriendin zit te drinken. Je doet soms gewoon zo negatief tegen me en ik kan dat emotioneel gewoon niet aan", 5));
+
+                            buttonTextList.Add("Troost haar");
+                            buttonTextList.Add("Zeg dat jij helemaal niet zo negatief doet");
+
+                            break;
+
+                        //Een paar hobbeltjes in de weg
+                        case 1:
+                            chatBranch = 7;
+                            messageList.Add(new Message("Mikey", "Er zitten soms wat hobbeltjes in de weg, maar verder gaat het wel goed", 0));
+                            messageList.Add(new Message("Rob", "Wat houden die hobbeltjes dan in?", 0));
+                            messageList.Add(new Message("Mikey", "Nou soms dan doet ze net alsof ik met niemand anders om mag gaan of dat ik niets nuttigs kan doen", 0));
+                            messageList.Add(new Message("Rob", "Damn, dat klinkt niet zo gevond dude. Je zou het me wel laten weten als je ergens mee zit hé?, je kunt altijd op mij rekenen", 0));
+                            messageList.Add(new Message("Mikey", "Ahh ik overleef het wel, toch bedankt dat je me verteld dat ik op je kan rekenen.", 0));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[4]);
+                            messageList.Add(new Message("Mikey", "Hey schat, ik vind dat je de laatste tijd wel een beetje negatief doet tegen me", 0));
+                            messageList.Add(new Message("Laura", "Wanneer dan?", 5));
+                            messageList.Add(new Message("Mikey", "Nou het feit dat je niet wilt dat ik met me vrienden omga zonder jou, vind ik best wel negatief", 0));
+                            messageList.Add(new Message("Laura", "Ja, maar dat komt omdat jij niet denkt aan hoe ik me voel op dat soort momenten", 5));
+                            messageList.Add(new Message("Mikey", "Alsnog denk ik dat je je daar wat minder over moeten stressen", 0));
+                            messageList.Add(new Message("Laura", "Ik kan me niet zomaar minder stressen, wanneer jij met mijn beste vriendin zit te drinken. Je doet soms gewoon zo negatief tegen me en ik kan dat emotioneel gewoon niet aan", 5));
+
+                            buttonTextList.Add("Troost haar");
+                            buttonTextList.Add("Zeg dat jij helemaal niet zo negatief doet");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
+                //branch 7
+                case 7:
+                    switch (pressedButton)
+                    {
+                        //Troost haar
+                        case 0:
+                            chatBranch = 7;
+                            messageList.Add(new Message("Mikey", "Ohh sorry babe, ik heb dat dan gewoon niet doorgehad", 0));
+                            messageList.Add(new Message("Laura", "Het is oké liefje, ik hou gewoon zoveel van je en wil je niet kwijt door je negatieve gedrag.", 5));
+                            messageList.Add(new Message("Mikey", "Ik snap het babe, ik zal beter nadenken over wat ik zeg", 0));
+
+
+
+                            break;
+
+                        //Zeg dat jij helemaal niet zo negatief doet
+                        case 1:
+                            chatBranch = 8;
+                            messageList.Add(new Message("Mikey", "Zo negatief doe ik niet, volgens mij stel je je een beetje aan", 0));
+                            messageList.Add(new Message("Laura", "En volgens mij moet jij niet zo gemeen doen, je weet dat ik dit apartment betaal en dat je wel bij me moet blijven", 5));
+                           
+                            buttonTextList.Add("Sorry zeggen(blijven)");
+                            buttonTextList.Add("Bij je vrienden hulp zoeken(weggaan)");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
+                //branch 8
+                case 8:
+                    switch (pressedButton)
+                    {
+                        //Sorry zeggen(blijven)
+                        case 0:
+                            chatBranch = 9;
+                            messageList.Add(new Message("Mikey", "Het spijt me babe, ik draaide zeker weer door. Ik zal voortaan beter nadenken over wat ik zeg", 0));
+
+                            buttonTextList.Add("Sorry zeggen(blijven)");
+                            buttonTextList.Add("Bij je vrienden hulp zoeken(weggaan)");
+
+
+
+                            break;
+
+                        //Bij je vrienden hulp zoeken(weggaan)
+                        case 1:
+                            chatBranch = 9;
+                            messageList.Add(new Message("Mikey", "Ik trek dit niet langer, ik ga bij een van onze vrienden overnachten", 0));
+                           
+                            buttonTextList.Add("Sorry zeggen(blijven)");
+                            buttonTextList.Add("Bij je vrienden hulp zoeken(weggaan)");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
+
 
                 default:
                     break;
