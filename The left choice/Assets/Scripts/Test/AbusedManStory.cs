@@ -452,7 +452,7 @@ public class AbusedManStory : MonoBehaviour
                     {
                         //Felix bellen en vertellen over de situatie
                         case 0:
-                            chatBranch = 3;
+                            chatBranch = 4;
                             messageList.Add(new Message("Felix", "Hey Mikey, waddup", 5));
                             messageList.Add(new Message("Mikey", "Hey Felix, ik wou even je mening horen over een iets dat net is gebeurd tussen mij en Laura.", 0));
                             messageList.Add(new Message("Felix", "Oké, vertel maar.", 5));
@@ -462,13 +462,26 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Felix", "Geen probleem, Mikey!", 5));
                             messageList.Add(new Message("Mikey", "~", 0));
                             nextSceneSetup = new SceneSetup(true, null, availableSprites[0], availableSprites[2], availableSprites[4], availableSprites[3]);
+                            messageList.Add(new Message("Felix", "Ik zag laatst trouwens een garage sale en daar zaten een paar prachtige race autootjes bij", 5));
+                            messageList.Add(new Message("Samantha", "Oh, cool dus die zitten nu bij je collectie?", 4));
+                            messageList.Add(new Message("Felix", "Yep", 5));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(false, availableSprites[0], null, null, null, availableSprites[2]);
+                            messageList.Add(new Message("Mikey", "Hey Laura", 0));
+                            messageList.Add(new Message("Laura", "Hey waar ben je op dit moment?", 5));
+                            messageList.Add(new Message("Mikey", "In het café samen met Rob en Samantha", 0));
+                            messageList.Add(new Message("Laura", "Waarom zit je met Samantha zonder mij?, ze is mijn vriendin", 5));
+                            messageList.Add(new Message("Mikey", "Uhm ze hoort toch gewoon bij de groep", 0));
+                            messageList.Add(new Message("Laura", "Vind je haar leuk ofzo?", 5));
 
+                            buttonTextList.Add("Verbaasd zijn over hoe ze dat kan zeggen");
+                            buttonTextList.Add("Sorry zeggen dat je daar niet over na had gedacht");
 
                             break;
 
                         //Felix niet lastigvallen met jullie onenigheidje
                         case 1:
-                            chatBranch = 3;
+                            chatBranch = 4;
                             messageList.Add(new Message("Felix", "~", 5));
                             nextSceneSetup = new SceneSetup(true, null, availableSprites[0], availableSprites[2], availableSprites[4], availableSprites[3]);
                             messageList.Add(new Message("Felix", "Ik zag laatst trouwens een garage sale en daar zaten een paar prachtige race autootjes bij", 5));
@@ -478,11 +491,13 @@ public class AbusedManStory : MonoBehaviour
                             nextSceneSetup = new SceneSetup(false, availableSprites[0], null, null, null, availableSprites[2]);
                             messageList.Add(new Message("Mikey", "Hey Laura", 0));
                             messageList.Add(new Message("Laura", "Hey waar ben je op dit moment?", 5));
-                            messageList.Add(new Message("Mikey", "In het café samen met Rob en Samantha", 5));
+                            messageList.Add(new Message("Mikey", "In het café samen met Rob en Samantha", 0));
                             messageList.Add(new Message("Laura", "Waarom zit je met Samantha zonder mij?, ze is mijn vriendin", 5));
-                            messageList.Add(new Message("Felix", "Yep", 5));
-                            messageList.Add(new Message("Felix", "Yep", 5));
+                            messageList.Add(new Message("Mikey", "Uhm ze hoort toch gewoon bij de groep", 0));
+                            messageList.Add(new Message("Laura", "Vind je haar leuk ofzo?", 5));
 
+                            buttonTextList.Add("Verbaasd zijn over hoe ze dat kan zeggen");
+                            buttonTextList.Add("Sorry zeggen dat je daar niet over na had gedacht");
                             break;
 
                             //default:
@@ -490,7 +505,46 @@ public class AbusedManStory : MonoBehaviour
                     }
                     break;
 
+                //branch 4
+                case 4:
+                    switch (pressedButton)
+                    {
+                        //Verbaasd zijn over hoe ze dat kan zeggen
+                        case 0:
+                            chatBranch = 4;
+                            messageList.Add(new Message("Mikey", "Hey Laura", 0));
+                            messageList.Add(new Message("Laura", "Nou ik zie je wel naar haar kijken, houd je nog wel van me?", 5));
+                            messageList.Add(new Message("Mikey", "Natuurlijk houd ik nog van je schat.", 0));
+                            messageList.Add(new Message("Laura", "Mooi, dan wil ik niet meer dat je met Samantha omgaat zonder dat ik erbij ben", 5));
+                            messageList.Add(new Message("Mikey", "Is dat niet een beetje drastisch?", 0));
+                            messageList.Add(new Message("Laura", "EEN BEETJE DRASTISCH?, ik mag hopen dat je dat niet meende, ohja en nog iets, ik wil dat je nu gelijk naar huis komt", 5));
+                            messageList.Add(new Message("Mikey", "Ja is goed, ik kom naar je toe", 0));
 
+                            buttonTextList.Add("Verbaasd zijn over hoe ze dat kan zeggen");
+                            buttonTextList.Add("Sorry zeggen dat je daar niet over na had gedacht");
+
+                            break;
+
+                        //Sorry zeggen dat je daar niet over na had gedacht
+                        case 1:
+                            chatBranch = 4;
+                            messageList.Add(new Message("Mikey", "Tuurlijk niet, ik heb jou toch", 0));
+                            messageList.Add(new Message("Laura", "Heb je sowieso wel nagedacht over hoe ik me nu voel?", 5));
+                            messageList.Add(new Message("Laura", "Ik hou zoveel van je en dan spreek je gewoon met haar af achter me rug om", 5));
+                            messageList.Add(new Message("Mikey", "Dat is niet precies hoe het is gegaan babe", 0));
+                            messageList.Add(new Message("Laura", "MAAKT ME NIET UIT, ik wil niet meer dat je nog met haar omgaat zonder dat ik erbij ben", 5));
+                            messageList.Add(new Message("Laura", "Oh en ik mag hopen dat je al onderweg naar huis bent", 5));
+                            messageList.Add(new Message("Mikey", "Uhh ja ik kom er nu gelijk aan, totzo", 0));
+
+
+                            buttonTextList.Add("Verbaasd zijn over hoe ze dat kan zeggen");
+                            buttonTextList.Add("Sorry zeggen dat je daar niet over na had gedacht");
+                            break;
+
+                            //default:
+                            //    break;
+                    }
+                    break;
 
                 default:
                     break;
