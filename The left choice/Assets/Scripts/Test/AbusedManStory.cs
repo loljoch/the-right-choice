@@ -460,7 +460,8 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Felix", "Ah joh, zulke dingen gebeuren wel eens in relaties, ik denk dat je het gewoon moet vergeten. Zij had vast ook een zware dag achter de rug.", 5));
                             messageList.Add(new Message("Mikey", "Hmm... Misschien heb je gelijk en moet ik het laten zitten. Ze is vast gewoon moe van vandaag. Thanks, Felix. ", 0));
                             messageList.Add(new Message("Felix", "Geen probleem, Mikey!", 5));
-                            nextSceneSetup = new SceneSetup(true, availableSprites[0], null, null, null, null);
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(true, null, availableSprites[0], availableSprites[2], availableSprites[4], availableSprites[3]);
 
 
                             break;
@@ -468,10 +469,19 @@ public class AbusedManStory : MonoBehaviour
                         //Felix niet lastigvallen met jullie onenigheidje
                         case 1:
                             chatBranch = 3;
-                            messageList.Add(new Message("Mikey", "~", 0));
+                            messageList.Add(new Message("Felix", "~", 5));
                             nextSceneSetup = new SceneSetup(true, null, availableSprites[0], availableSprites[2], availableSprites[4], availableSprites[3]);
                             messageList.Add(new Message("Felix", "Ik zag laatst trouwens een garage sale en daar zaten een paar prachtige race autootjes bij", 5));
-                            messageList.Add(new Message("Samantha", "Oh, cool dus die zitten nu bij je collectie?", 5));
+                            messageList.Add(new Message("Samantha", "Oh, cool dus die zitten nu bij je collectie?", 4));
+                            messageList.Add(new Message("Felix", "Yep", 5));
+                            messageList.Add(new Message("Mikey", "~", 0));
+                            nextSceneSetup = new SceneSetup(false, availableSprites[0], null, null, null, availableSprites[2]);
+                            messageList.Add(new Message("Mikey", "Hey Laura", 0));
+                            messageList.Add(new Message("Laura", "Hey waar ben je op dit moment?", 5));
+                            messageList.Add(new Message("Mikey", "In het café samen met Rob en Samantha", 5));
+                            messageList.Add(new Message("Laura", "Waarom zit je met Samantha zonder mij?, ze is mijn vriendin", 5));
+                            messageList.Add(new Message("Felix", "Yep", 5));
+                            messageList.Add(new Message("Felix", "Yep", 5));
 
                             break;
 
