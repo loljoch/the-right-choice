@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManagerScript : MonoBehaviour
 {
     public int amountOfPlayers;
-    private int previousTurn;
+    public int previousTurn;
 
     private void Start()
     {
@@ -32,4 +32,7 @@ public class PlayerManagerScript : MonoBehaviour
     {
         return previousTurn;
     }
+
 }
+
+

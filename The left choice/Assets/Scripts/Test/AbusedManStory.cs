@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AbusedManStory : MonoBehaviour
 {
@@ -183,12 +184,15 @@ public class AbusedManStory : MonoBehaviour
             if(tempString != "~")
             {
                 break;
-            } else
+            } else if(tempString == "~")
             {
                 StartCoroutine(NextScene(nextSceneSetup[0]));
                 skipRoutine = true;
 
                 break;
+            } else if(tempString == "#")
+            {
+                StartCoroutine(EndGame());
             }
         }
 
@@ -266,11 +270,6 @@ public class AbusedManStory : MonoBehaviour
 
     public void NextPartOfStory(int buttonPressed)
     {
-        if(buttonPressed > 3)
-        {
-            isInFirstPick = false;
-            pressedButton = buttonPressed;
-        }
         if (isInFirstPick)
         { 
             isInFirstPick = false;
@@ -370,7 +369,7 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Mikey", "~", 0));
                          
                             messageList.Add(new Message("Mikey", " ", 0));
-                            nextSceneSetup.Add(new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[2], backgroundSprites[6]));
+                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[0], null, null, null, availableSprites[2], backgroundSprites[6]));
                             messageList.Add(new Message("Mikey", "~", 0));
                             
                             messageList.Add(new Message("Mikey", "Hey schat, hoe was je dag?", 0));
@@ -403,7 +402,7 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Mikey", "~", 0));
                             
                             messageList.Add(new Message("Mikey", " ", 0));
-                            nextSceneSetup.Add(new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[2], backgroundSprites[6]));
+                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[0], null, null, null, availableSprites[2], backgroundSprites[6]));
                             messageList.Add(new Message("Mikey", "~", 0));
                             
                             messageList.Add(new Message("Mikey", "Hey schat, hoe was je dag?", 0));
@@ -426,7 +425,7 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Mikey", "~", 0));
                            
                             messageList.Add(new Message("Mikey", " ", 0));
-                            nextSceneSetup.Add(new SceneSetup(true, availableSprites[0], null, null, null, availableSprites[2], backgroundSprites[6]));
+                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[0], null, null, null, availableSprites[2], backgroundSprites[6]));
                             messageList.Add(new Message("Mikey", "~", 0));
                             
                             messageList.Add(new Message("Mikey", "Hey schat, hoe was je dag?", 0));
@@ -703,7 +702,7 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Mikey", "Ohh sorry babe, ik heb dat dan gewoon niet doorgehad", 0));
                             messageList.Add(new Message("Laura", "Het is oké liefje, ik hou gewoon zoveel van je en wil je niet kwijt door je negatieve gedrag.", 4));
                             messageList.Add(new Message("Mikey", "Ik snap het babe, ik zal beter nadenken over wat ik zeg", 0));
-
+                            messageList.Add(new Message("Mikey", "@", 0));
 
 
                             break;
@@ -731,10 +730,7 @@ public class AbusedManStory : MonoBehaviour
                         case 0:
                             chatBranch = 9;
                             messageList.Add(new Message("Mikey", "Het spijt me babe, ik draaide zeker weer door. Ik zal voortaan beter nadenken over wat ik zeg", 0));
-
-                            buttonTextList.Add("Sorry zeggen(blijven)");
-                            buttonTextList.Add("Bij je vrienden hulp zoeken(weggaan)");
-
+                            messageList.Add(new Message("Mikey", "@", 0));
 
 
                             break;
@@ -743,9 +739,7 @@ public class AbusedManStory : MonoBehaviour
                         case 1:
                             chatBranch = 9;
                             messageList.Add(new Message("Mikey", "Ik trek dit niet langer, ik ga bij een van onze vrienden overnachten", 0));
-                           
-                            buttonTextList.Add("Sorry zeggen(blijven)");
-                            buttonTextList.Add("Bij je vrienden hulp zoeken(weggaan)");
+                            messageList.Add(new Message("Mikey", "@", 0));
                             break;
 
                             //default:
@@ -819,5 +813,15 @@ public class AbusedManStory : MonoBehaviour
         //    Debug.Log("het werkt helaas niet");
         //}
 
+    }
+
+    IEnumerator EndGame()
+    {
+        sceneTransition.SetActive(true);
+        sceneTransition.GetComponent<Animator>().SetBool("PlayAnim", true);
+        yield return new WaitForSeconds(1.5f);
+        playerManager.amountOfPlayers = 0;
+        playerManager.previousTurn = 0;
+        SceneManager.LoadScene(1);
     }
 }
