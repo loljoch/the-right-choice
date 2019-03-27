@@ -1579,7 +1579,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3a5346789d9a7834f8125917915d247e, type: 3}
   - {fileID: 21300000, guid: bb3a34f43a746e745ad8f034508b51e8, type: 3}
   - {fileID: 21300000, guid: f5536ded8eda661489d1b66fc07deabd, type: 3}
-  - {fileID: 21300000, guid: d46c91b9afdaa0a40bda7d601e620cf7, type: 3}
+  - {fileID: 21300000, guid: c8b77d7f890c3cb45963f3a92840415a, type: 3}
   - {fileID: 21300000, guid: d2d3a8dc61149f94383d67add736a2d0, type: 3}
   backgroundSprites:
   - {fileID: 21300000, guid: d825808193f2d75468a5320b246a96ef, type: 3}
@@ -1608,8 +1608,8 @@ MonoBehaviour:
   - 
   - 
   - 
-  timeBetweenMessages: 0.02
-  standardTimeBetweenMessages: 0.02
+  timeBetweenMessages: 0
+  standardTimeBetweenMessages: 0
   isWriting: 0
   isInChoice: 0
   isInFirstPick: 1

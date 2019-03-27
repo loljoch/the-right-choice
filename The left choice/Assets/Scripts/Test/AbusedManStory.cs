@@ -181,7 +181,7 @@ public class AbusedManStory : MonoBehaviour
         foreach (char c in messageList[messageNumber].textMessage)
         {
             string tempString = c+"";
-            if(tempString != "~")
+            if(tempString != "~" && tempString != "@")
             {
                 break;
             } else if(tempString == "~")
@@ -190,9 +190,10 @@ public class AbusedManStory : MonoBehaviour
                 skipRoutine = true;
 
                 break;
-            } else if(tempString == "#")
+            } else if(tempString == "@")
             {
                 StartCoroutine(EndGame());
+                break;
             }
         }
 
@@ -491,7 +492,7 @@ public class AbusedManStory : MonoBehaviour
                         //Felix bellen en vertellen over de situatie
                         case 0:
                             chatBranch = 4;
-                            nextSceneSetup.Add(new SceneSetup(true, availableSprites[6], null, null, null, availableSprites[5], backgroundSprites[8]));
+                            nextSceneSetup.Add(new SceneSetup(true, availableSprites[6], null, null, null, availableSprites[5], backgroundSprites[7]));
                             messageList.Add(new Message("Mikey", "~", 0));
                             
                             messageList.Add(new Message("Felix", "Hey Mikey, waddup", 4));
@@ -507,7 +508,7 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Felix", "Ik zag laatst trouwens een garage sale en daar zaten een paar prachtige race autootjes bij", 1));
                             messageList.Add(new Message("Samantha", "Oh, cool dus die zitten nu bij je collectie?", 3));
                             messageList.Add(new Message("Felix", "Yep", 1));
-                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[6], null, null, null, availableSprites[7], backgroundSprites[9]));
+                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[6], null, null, null, availableSprites[7], backgroundSprites[8]));
                             messageList.Add(new Message("Mikey", "~", 0));
                             
                             messageList.Add(new Message("Mikey", "Hey Laura", 0));
@@ -531,7 +532,7 @@ public class AbusedManStory : MonoBehaviour
                             messageList.Add(new Message("Felix", "Ik zag laatst trouwens een garage sale en daar zaten een paar prachtige race autootjes bij", 1));
                             messageList.Add(new Message("Samantha", "Oh, cool dus die zitten nu bij je collectie?", 3));
                             messageList.Add(new Message("Felix", "Yep", 1));
-                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[6], null, null, null, availableSprites[7], backgroundSprites[9]));
+                            nextSceneSetup.Add(new SceneSetup(false, availableSprites[6], null, null, null, availableSprites[7], backgroundSprites[8]));
                             messageList.Add(new Message("Mikey", "~", 0));
                            
                             messageList.Add(new Message("Mikey", "Hey Laura", 0));
